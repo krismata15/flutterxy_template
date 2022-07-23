@@ -1,0 +1,19 @@
+include: package:very_good_analysis/analysis_options.yaml
+analyzer:
+  language:
+    strict-casts: false
+    strict-inference: true
+    strict-raw-types: true
+  errors:
+    # allow having TODOs in the code
+    todo: ignore
+  exclude:
+    - lib/generated
+    - lib/l10n
+
+linter:
+  rules:
+    public_member_api_docs: false
+    omit_local_variable_types: false
+    require_trailing_commas: false
+    #lines_longer_than_80_chars: false
