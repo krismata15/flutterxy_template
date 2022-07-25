@@ -42,11 +42,11 @@ class MainDashboard extends StatelessWidget {
                           children: [
                             //First part
                             SizedBox(
-                              height: maxHeight * 0.26,
+                              height: maxHeight * 0.20,
                               child: Row(
                                 children: [
                                   SizedBox(
-                                    width: constrains.maxWidth * 0.40,
+                                    width: constrains.maxWidth * 0.30,
                                     child: const CongratulationsSalesDE(),
                                   ),
                                   const Expanded(
@@ -57,11 +57,11 @@ class MainDashboard extends StatelessWidget {
                             ),
                             //Second
                             SizedBox(
-                              height: maxHeight * 0.48,
+                              height: maxHeight * 0.44,
                               child: Row(
                                 children: [
                                   SizedBox(
-                                    width: constrains.maxWidth * 0.40,
+                                    width: constrains.maxWidth * 0.30,
                                     child: Column(
                                       children: [
                                         Row(
@@ -88,7 +88,7 @@ class MainDashboard extends StatelessWidget {
                             ),
                             //Third
                             SizedBox(
-                              height: maxHeight * 0.6,
+                              height: maxHeight * 0.55,
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
@@ -104,7 +104,7 @@ class MainDashboard extends StatelessWidget {
                             ),
                             //Fourth
                             SizedBox(
-                              height: maxHeight * 0.52,
+                              height: maxHeight * 0.42,
                               child: Row(
                                 children: [
                                   SizedBox(
@@ -161,8 +161,8 @@ class MainDashboard extends StatelessWidget {
 
 class TransactionsDE extends StatelessWidget {
   const TransactionsDE({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -316,7 +316,7 @@ class GoalOverviewDE extends StatelessWidget {
               ],
             ),
             CircularPercentIndicator(
-              radius: closeConstraints.minWidth * 0.26,
+              radius: closeConstraints.minWidth * 0.20,
               lineWidth: 10,
               center: const Text(
                 '83%',
