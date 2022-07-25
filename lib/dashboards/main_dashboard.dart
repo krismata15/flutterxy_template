@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutterxy/appbar/standard_app_bar.dart';
 import 'package:flutterxy/dashboards/widgets/companies_table_de.dart';
+import 'package:flutterxy/utils/device_type_based_on_screen.dart';
 import 'package:flutterxy/utils/styles_values.dart';
 import 'package:flutterxy/utils/text_styles.dart';
 import 'package:flutterxy/widgets/basic_elevated_container.dart';
 import 'package:flutterxy/widgets/standard_button.dart';
+import 'package:flutterxy/widgets/standard_drawer.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class MainDashboard extends StatelessWidget {
@@ -13,120 +16,144 @@ class MainDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Scrollbar(
-        child: LayoutBuilder(builder: (context, constrains) {
-          final double maxHeight = MediaQuery.of(context).size.height;
-          return Padding(
-            padding: const EdgeInsets.all(10),
-            child: ListView(
-              children: [
-                //First part
-                SizedBox(
-                  height: maxHeight * 0.26,
-                  child: Row(
+      drawer: DeviceScreen.isTablet(context) ? const StandardDrawer() : null,
+      body: Row(
+        children: [
+          if (DeviceScreen.isMonitor(context))
+            SizedBox(
+              height: MediaQuery.of(context).size.height,
+              child: const StandardDrawer(
+                elevation: 0,
+              ),
+            ),
+          Expanded(
+            child: Scrollbar(
+              child: LayoutBuilder(builder: (context, constrains) {
+                final double maxHeight = MediaQuery.of(context).size.height;
+                return Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
-                        width: constrains.maxWidth * 0.40,
-                        child: const CongratulationsSalesDE(),
-                      ),
-                      const Expanded(
-                        child: StatisticsDataDE(),
-                      ),
-                    ],
-                  ),
-                ),
-                //Second
-                SizedBox(
-                  height: maxHeight * 0.48,
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: constrains.maxWidth * 0.40,
-                        child: Column(
+                      const StandardAppBar(),
+                      Expanded(
+                        child: ListView(
+                          padding: EdgeInsets.zero,
                           children: [
-                            Row(
-                              children: const [
-                                Expanded(
-                                  child: OrdersTotalDE(),
-                                ),
-                                Expanded(
-                                  child: ProfitTotalDE(),
-                                ),
-                              ],
+                            //First part
+                            SizedBox(
+                              height: maxHeight * 0.26,
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: constrains.maxWidth * 0.40,
+                                    child: const CongratulationsSalesDE(),
+                                  ),
+                                  const Expanded(
+                                    child: StatisticsDataDE(),
+                                  ),
+                                ],
+                              ),
                             ),
-                            const Expanded(
-                              child: EarningsTotalDE(),
+                            //Second
+                            SizedBox(
+                              height: maxHeight * 0.48,
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: constrains.maxWidth * 0.40,
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          children: const [
+                                            Expanded(
+                                              child: OrdersTotalDE(),
+                                            ),
+                                            Expanded(
+                                              child: ProfitTotalDE(),
+                                            ),
+                                          ],
+                                        ),
+                                        const Expanded(
+                                          child: EarningsTotalDE(),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  const Expanded(
+                                    child: RevenueReportDataDE(),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            //Third
+                            SizedBox(
+                              height: maxHeight * 0.6,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  SizedBox(
+                                    width: constrains.maxWidth * 0.65,
+                                    child: const CompaniesTableDE(),
+                                  ),
+                                  const Expanded(
+                                    child: EventsPanelDE(),
+                                  )
+                                ],
+                              ),
+                            ),
+                            //Fourth
+                            SizedBox(
+                              height: maxHeight * 0.52,
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: constrains.maxWidth * 0.65,
+                                    child: Row(
+                                      children: const [
+                                        Expanded(
+                                          child: BrowserStatesDE(),
+                                        ),
+                                        Expanded(
+                                          child: GoalOverviewDE(),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const Expanded(
+                                    child: TransactionsDE(),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            //
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: Column(
+                                children: [
+                                  const SizedBox(
+                                    height: 30,
+                                  ),
+                                  Row(
+                                    children: const [
+                                      Text(
+                                          'COPYRIGHT © 2022 @kmata, All rights Reserved'),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             )
                           ],
                         ),
                       ),
-                      const Expanded(
-                        child: RevenueReportDataDE(),
-                      ),
                     ],
                   ),
-                ),
-                //Third
-                SizedBox(
-                  height: maxHeight * 0.6,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      SizedBox(
-                        width: constrains.maxWidth * 0.65,
-                        child: const CompaniesTableDE(),
-                      ),
-                      const Expanded(
-                        child: EventsPanelDE(),
-                      )
-                    ],
-                  ),
-                ),
-                //Fourth
-                SizedBox(
-                  height: maxHeight * 0.52,
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: constrains.maxWidth * 0.65,
-                        child: Row(
-                          children: const [
-                            Expanded(
-                              child: BrowserStatesDE(),
-                            ),
-                            Expanded(
-                              child: GoalOverviewDE(),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const Expanded(
-                        child: TransactionsDE(),
-                      ),
-                    ],
-                  ),
-                ),
-                //
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      Row(
-                        children: const [
-                          Text('COPYRIGHT © 2022 @kmata, All rights Reserved'),
-                        ],
-                      ),
-                    ],
-                  ),
-                )
-              ],
+                );
+              }),
             ),
-          );
-        }),
+          ),
+        ],
       ),
     );
   }
